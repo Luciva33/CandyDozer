@@ -25,6 +25,7 @@ public class Pushers : MonoBehaviour
         //新しいVector3の構造体
         //c#では変数宣言のとき、右辺の型が明確なときはvarを使って省略していいルールがある
         //後から型変更はできない。あくまで労力削減のため
+        //varを使える条件は一行。二行に分けられない
         var pos = new Vector3(100, transform.position.y, transform.position.x);
         transform.position = pos;
 

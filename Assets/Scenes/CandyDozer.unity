@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb63b7f418e1227498a768b9873faf32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 5
+  amplitude: 2
   speed: 2
 --- !u!54 &714821748
 Rigidbody:
@@ -2810,6 +2810,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyManger: {fileID: 1390211871}
   reward: 3
+  effectPrefab: {fileID: 288428676035742862, guid: 661ca181edcacaf4ebdaec3bfab5cbbb, type: 3}
+  effectRotation: {x: -90, y: 0, z: 0}
 --- !u!4 &1963142968
 Transform:
   m_ObjectHideFlags: 0
@@ -3040,6 +3042,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyManger: {fileID: 1390211871}
   reward: 0
+  effectPrefab: {fileID: 0}
+  effectRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &2053044185
 Transform:
   m_ObjectHideFlags: 0

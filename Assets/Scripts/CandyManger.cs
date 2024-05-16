@@ -43,6 +43,7 @@ public class CandyManger : MonoBehaviour
         if (candy < DefaultCandyAmount && counter <= 0)
         {
             StartCoroutine(RecoverCandy());
+            Debug.Log("hi!");
         }
     }
 

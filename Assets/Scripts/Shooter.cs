@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    //ショットパワーの回復時間接続
+    const int MaxShotPower = 5;
+    //ショットパワーの回復時間定数
+    const int RecoverySeconds = 3;
+
+    int shotPower = MaxShotPower;
+
+    AudioSource shotSound;
+
 
     //キャンディプレハブプロパティの配列化
     public GameObject[] candyPrefabs;
@@ -13,6 +22,11 @@ public class Shooter : MonoBehaviour
     public float shotForce;
     public float shotTorque;
     public float baseWidth;
+
+    void Start()
+    {
+        shotSound = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -45,6 +59,9 @@ public class Shooter : MonoBehaviour
     {
         //キャンディを生成できる条件外ならSHOTしない
         if (candyManager.GetCandyAmount() <= 0) return;
+        //ショットパワーチェック
+        if (shotPower <= 0) return;
+
 
         //プレハブからCandyオブジェクト生成
         GameObject candy = (GameObject)Instantiate(
@@ -76,7 +93,38 @@ public class Shooter : MonoBehaviour
 
         //candyのストックを消費
         candyManager.ConsumeCandy();
+        //ショットパワーを消費
+        ConsumePower();
 
+        //サウンドを再生
+        shotSound.Play();
+
+    }
+    // ショットパワーの表示
+    void OnGUI()
+    {
+        GUI.color = Color.black;
+
+        //ShotPowerの残数を+の数で表示
+        string label = "";
+        for (int i = 0; i < shotPower; i++) label = label + "+";
+        GUI.Label(new Rect(50, 65, 100, 30), label);
+    }
+
+    //ショットパワーの消費処理
+    void ConsumePower()
+    {
+        //shotPowerを消費すると同時に回復のカウントをスタート
+        shotPower--;
+        StartCoroutine(RecoverPower());
+    }
+
+    //ショットパワーの回復コルーチン
+    IEnumerator RecoverPower()
+    {
+        //一定数秒待った後、shotPowerを回復
+        yield return new WaitForSeconds(RecoverySeconds);
+        shotPower++;
     }
 
 }
